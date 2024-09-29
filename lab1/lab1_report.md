@@ -16,7 +16,7 @@ Lab: Lab1
 
 Date of create: 28.09.2024
 
-Date of finished: 30.09.2024
+Date of finished: 29.09.2024
 
 ---
 
@@ -112,7 +112,7 @@ apt update && apt -y install openvpn-as
 
 
 Далее был создан профиль Persiwall с возможностью свободного подключения(скриншот почему-то забыл сделать)
-https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-54-08.png
+
 ### Подключение локальной ВМ к серверу
 
 Была скачена программа WibBox. 
