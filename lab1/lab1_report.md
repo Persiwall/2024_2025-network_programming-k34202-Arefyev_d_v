@@ -75,7 +75,7 @@ sudo apt install --reinstall virtualbox-dkms virtualbox
 
 После успешного создания локальной ВМ, я вернулся к облачной ВМ, чтобы создать на ней Open VPN сервер (я выбрал OpenVPN, пойдя по пути наименшего сопротивления, не желая сталкиваться с проблемами Wireguard в РФ)
 
-Итак, сначала я со своего рабочего устройства подключился в ВМ через ssh
+Итак, сначала я со своего рабочего устройства подключился к ВМ через ssh
 
 ![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2015-28-39.png "Подключение к ВМ")
 
@@ -98,7 +98,7 @@ apt update && apt -y install openvpn-as
 
 ![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2016-36-51.png "Создание сервера")
 
-Для дальнейшей настройки я посмотрел внешний IP-адрес своей облачной ВМ и перешёл по ссылке: https://84.201.148.232:943/admin и зайдём в систему под логином openvpn и паролем, который был указан после создания сервера
+Для дальнейшей настройки я посмотрел внешний IP-адрес своей облачной ВМ и перешёл по ссылке: https://84.201.148.232:943/admin , зайдя в систему под логином openvpn и паролем, который был указан при создания сервера
 
 ![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2016-47-55.png "Настройка сервера")
 
@@ -112,7 +112,33 @@ apt update && apt -y install openvpn-as
 
 
 Далее был создан профиль Persiwall с возможностью свободного подключения(скриншот почему-то забыл сделать)
-
+https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-54-08.png
 ### Подключение локальной ВМ к серверу
 
+Была скачена программа WibBox. 
 
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-00-09.png "WinBox")
+
+В ней, зайдя в раздел neighbours, была выбрана нужна локальная ВМ. В настойках самой ВМ тип подключения был изменён с NAT на Сетевой мост
+
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-02-38.png "Настройка сети")
+
+После этого подключение через WinBox прошло успешно
+
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-05-58.png "Подключение к ВМ через WinBox")
+
+После создания профиля на сайте openvpn-as был скачен файл с сертификатами. Этот файл был загружен в локальную ВМ через WinBox, после чего был произведён импорт самих сертификатов
+
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-19-00.png "Импорт сертификатов")
+
+В настройках интерфейсов был создан новый интерфейс, в котором был указан публичный адрес сервера, порт 443 и юзернейм persiwall 
+
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-24-35.png "Создание интерфейса")
+
+# Вывод
+
+В результате выполнения работы я научился создавать ВМ в облаке и локальные ВМ на CHR, а также познакомился с функионалом WinBox и настройкой openvpn-as
+
+Тоннель успешно работает. Докажем это пингом на сервер с локальной ВМ
+
+![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202024-09-28%2017-54-08.png "Пинг сервера")
