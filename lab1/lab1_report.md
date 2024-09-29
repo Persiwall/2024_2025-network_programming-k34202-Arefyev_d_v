@@ -30,7 +30,7 @@ Date of finished: 30.09.2024
 
 Был создан аккаунт в Yandex Cloud
 
-![](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/yandex_cloud.png "Основная страница Yandex Compute Cloud")
+![image](https://github.com/Persiwall/2024_2025-network_programming-k34202-Arefyev_d_v/blob/main/lab1/pictures/yandex_cloud.png "Основная страница Yandex Compute Cloud")
 
 Была выбрана конфигурация с минимально возможными характеристиками. Для того, чтобы завершить создание машины, потребовалось сгенерировать на локальной машине ssh-ключ
 
