@@ -1,3 +1,96 @@
+# Лабораторная работа №2 "Развертывание дополнительного CHR, первый сценарий Ansible"
+---
+University: [ITMO University](https://itmo.ru/ru/)
+
+Faculty: [FICT](https://fict.itmo.ru)
+
+Course: [Network programming](https://github.com/itmo-ict-faculty/network-programming)
+
+Year: 2024/2025
+
+Group: K34202
+
+Author: Arefyev Dmitriy Vladimirovich
+
+Lab: Lab2
+
+Date of create: 30.09.2024
+
+Date of finished: 13.12.2024
+
+---
+
+## Цель работы
+
+Целью данной работы является развертывание виртуальной машины на базе платформы Microsoft Azure с установленной системой контроля конфигураций Ansible и установка CHR в VirtualBox
+
+## Ход работы
+
+### Создание и подключение второго пользователя
+
+В VirtualBox была создана копия первой виртуальной машины.
+
+<p align="center">
+  <img src="img/lab21.png" align="center">
+</p>
+
+В параметрах сети был также выбран сетевой мост. Далее в веб-клиенте OpenVPN Access Server был создан второй пользователь с именем Arthur
+
+<p align="center">
+  <img src="img/lab22.png" align="center">
+</p>
+
+Скаченный сертификат был загружен во вторую виртуальную машину. Командой ```ip address remove 0``` был удален адрес второй машины, потому что он повторял адрес первой, из-за чего обе не могли подключиться к серверу. Командой ```ip address add address=192.168.8.136/24 interface=ether1``` машине был выдан новый адрес. Теперь оба пользователя успешно подключились к серверу и получили адреса в сети VPN
+
+<p align="center">
+  <img src="img/lab23.png" align="center">
+</p>
+
+### Работа с Ansible
+
+Был написан файл инвентаря hosts.ini и в нём указаны данные конфигурирования
+
+<p align="center">
+  <img src="img/lab24.png" align="center">
+</p>
+
+Файл инветаря сразу же был протестирован при помощи ping
+
+<p align="center">
+  <img src="img/lab25.png" align="center">
+</p>
+
+Далее был написан playbook
+
+<p align="center">
+  <img src="img/lab26.png" align="center">
+</p>
+
+Плейбук был запущен командой ```ansible-playbook -i hosts.ini playbook.yml```
+
+<p align="center">
+  <img src="img/lab27.png" align="center">
+</p>
+
+На самом деле всё прошло не так гладко, как показано на картинке. Сначала пришлось изменить правила ssh в ssh_config, чтобы можно было свободно подключаться к незнакомым устойствам без проверок безопасности. Так или иначе, всё сработало успешно. На машинах были созданы новые пользователи
+
+<p align="center">
+  <img src="img/lab29.png" align="center">
+</p>
+
+Проверим также OSPF на машинах
+
+<p align="center">
+  <img src="img/lab210.png" align="center">
+</p>
+
+### Схема связи
+
+<p align="center">
+  <img src="img/lab2network.png" align="center">
+</p>
+
+### Полные конфигурации устройств:
 
 Конфигурация CHR1:
 ```
@@ -135,6 +228,7 @@ ok: [chr1] => {
     }
 }
 ```
+
 Конфигурация CHR2:
 ```
 ok: [chr2] => {
