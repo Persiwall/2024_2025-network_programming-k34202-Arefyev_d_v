@@ -235,4 +235,7 @@ ansible_ssh_pass: 'admin'
 
 ### Схема связи
 
+<p align="center">
+  <img src="img/lab3scheme.png" align="center">
+</p>
 
