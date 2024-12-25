@@ -1,1 +1,9 @@
-
+plugin: netbox.netbox.nb_inventory
+api_endpoint: http://158.160.143.222:8000
+token: 26d0730141b68af200ac2b3ddbc604751547fde2
+validate_certs: False
+config_context: False
+interfaces: 'True'
+config_context: False
+ansible_user: admin
+ansible_ssh_pass: 'admin'
